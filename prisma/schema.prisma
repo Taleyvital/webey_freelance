@@ -1,0 +1,165 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Users ───────────────────────────────────────────────────────────────────
+
+model User {
+  id        String   @id @default(cuid())
+  phone     String?  @unique
+  email     String?  @unique
+  name      String?
+  avatarUrl String?
+  role      UserRole @default(CLIENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  clientProfile     ClientProfile?
+  freelancerProfile FreelancerProfile?
+  ordersAsClient    Order[]            @relation("ClientOrders")
+  sentMessages      Message[]          @relation("SentMessages")
+  notifications     Notification[]
+  reviews           Review[]           @relation("ReviewAuthor")
+}
+
+enum UserRole {
+  CLIENT
+  FREELANCER
+  ADMIN
+}
+
+// ─── Profiles ────────────────────────────────────────────────────────────────
+
+model ClientProfile {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  country   String?
+  company   String?
+  createdAt DateTime @default(now())
+}
+
+model FreelancerProfile {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bio           String?
+  country       String?
+  city          String?
+  isAvailable   Boolean  @default(true)
+  rating        Float    @default(0)
+  totalReviews  Int      @default(0)
+  repeatRate    Float    @default(0)
+  skills        String[]
+  portfolioUrls String[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  orders Order[] @relation("FreelancerOrders")
+}
+
+// ─── Orders ──────────────────────────────────────────────────────────────────
+
+model Order {
+  id                  String      @id @default(cuid())
+  clientId            String
+  client              User        @relation("ClientOrders", fields: [clientId], references: [id])
+  freelancerId        String?
+  freelancer          FreelancerProfile? @relation("FreelancerOrders", fields: [freelancerId], references: [id])
+  status              OrderStatus @default(PENDING)
+  title               String
+  description         String
+  category            String?
+  aiParsedSummary     String?
+  budget              Int?        // in local currency (FCFA, NGN, etc.)
+  currency            String      @default("FCFA")
+  deliveryDays        Int?
+  deliveredAt         DateTime?
+  completedAt         DateTime?
+  dueDate             DateTime?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  messages  Message[]
+  payments  Payment[]
+  reviews   Review[]
+}
+
+enum OrderStatus {
+  PENDING
+  MATCHED
+  IN_PROGRESS
+  IN_REVIEW
+  REVISION
+  DELIVERED
+  COMPLETED
+  CANCELLED
+  DISPUTED
+}
+
+// ─── Messages ────────────────────────────────────────────────────────────────
+
+model Message {
+  id        String   @id @default(cuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  senderId  String
+  sender    User     @relation("SentMessages", fields: [senderId], references: [id])
+  body      String
+  fileUrl   String?
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+}
+
+// ─── Payments ────────────────────────────────────────────────────────────────
+
+model Payment {
+  id              String        @id @default(cuid())
+  orderId         String
+  order           Order         @relation(fields: [orderId], references: [id])
+  amount          Int
+  currency        String        @default("FCFA")
+  status          PaymentStatus @default(PENDING)
+  provider        String?       // e.g. "orange_money", "wave", "stripe"
+  providerRef     String?
+  createdAt       DateTime      @default(now())
+  paidAt          DateTime?
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  REFUNDED
+  FAILED
+}
+
+// ─── Reviews ─────────────────────────────────────────────────────────────────
+
+model Review {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id])
+  authorId    String
+  author      User     @relation("ReviewAuthor", fields: [authorId], references: [id])
+  rating      Int      // 1-5
+  comment     String?
+  createdAt   DateTime @default(now())
+}
+
+// ─── Notifications ───────────────────────────────────────────────────────────
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  title     String
+  body      String?
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+}

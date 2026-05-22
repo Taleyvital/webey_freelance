@@ -1,0 +1,126 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import AmbientBlobs from "@/components/layout/AmbientBlobs";
+import Footer from "@/components/layout/Footer";
+
+type Role = "client" | "freelancer" | null;
+
+export default function OnboardingPage() {
+  const [selected, setSelected] = useState<Role>(null);
+  const router = useRouter();
+
+  function handleContinue() {
+    if (!selected) return;
+    if (selected === "client") router.push("/client/dashboard");
+    else router.push("/freelancer/dashboard");
+  }
+
+  return (
+    <div className="bg-background text-on-background flex flex-col min-h-screen">
+      <AmbientBlobs />
+
+      {/* Nav */}
+      <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div className="flex items-center justify-center h-20 page-container">
+          <Link href="/" className="flex items-center gap-2">
+            <div className="w-8 h-8 relative">
+              <Image src="/logo-webey.svg" alt="Webey" fill className="object-contain" priority />
+            </div>
+            <span className="text-headline-md font-semibold text-primary tracking-tighter">Webey</span>
+          </Link>
+        </div>
+      </header>
+
+      <main className="flex-grow flex items-center justify-center w-full px-6 md:px-16 pt-28 pb-stack-lg">
+        <div className="max-w-[800px] w-full">
+          {/* Header */}
+          <div className="text-center mb-stack-lg animate-fade-in-up">
+            <h1 className="text-headline-lg font-semibold text-on-surface mb-4">
+              Who are you?
+            </h1>
+            <p className="text-body-lg text-on-surface-variant max-w-[500px] mx-auto">
+              Choose the path that best describes your goals. We&apos;ll tailor your experience accordingly.
+            </p>
+          </div>
+
+          {/* Selection grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter animate-fade-in-up delay-100">
+            {/* Client */}
+            <button
+              onClick={() => setSelected("client")}
+              className={`group relative bg-surface-container-lowest p-stack-lg rounded-xl flex flex-col items-center text-center ambient-shadow cursor-pointer hover:bg-surface-container-low border-2 transition-all duration-300 ${
+                selected === "client"
+                  ? "border-primary scale-[1.02] bg-primary/5"
+                  : "border-transparent"
+              }`}
+            >
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-stack-md transition-transform group-hover:scale-110 ${
+                selected === "client" ? "bg-primary/15" : "bg-primary/10"
+              }`}>
+                <span className="material-symbols-outlined text-primary text-[40px]">person_search</span>
+              </div>
+              <h3 className="text-headline-md font-medium text-on-surface mb-2">Client</h3>
+              <p className="text-body-md text-on-surface-variant">
+                I want to hire magical talent and build amazing digital products.
+              </p>
+              {selected === "client" && (
+                <div className="mt-stack-md">
+                  <span className="material-symbols-outlined icon-filled text-primary text-[28px]">check_circle</span>
+                </div>
+              )}
+            </button>
+
+            {/* Freelancer */}
+            <button
+              onClick={() => setSelected("freelancer")}
+              className={`group relative bg-surface-container-lowest p-stack-lg rounded-xl flex flex-col items-center text-center ambient-shadow cursor-pointer hover:bg-surface-container-low border-2 transition-all duration-300 ${
+                selected === "freelancer"
+                  ? "border-secondary scale-[1.02] bg-secondary/5"
+                  : "border-transparent"
+              }`}
+            >
+              <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-stack-md transition-transform group-hover:scale-110 ${
+                selected === "freelancer" ? "bg-secondary/15" : "bg-secondary/10"
+              }`}>
+                <span className="material-symbols-outlined text-secondary text-[40px]">terminal</span>
+              </div>
+              <h3 className="text-headline-md font-medium text-on-surface mb-2">Freelancer</h3>
+              <p className="text-body-md text-on-surface-variant">
+                I am a digital artisan ready to contribute magic to premium projects.
+              </p>
+              {selected === "freelancer" && (
+                <div className="mt-stack-md">
+                  <span className="material-symbols-outlined icon-filled text-secondary text-[28px]">check_circle</span>
+                </div>
+              )}
+            </button>
+          </div>
+
+          {/* CTA */}
+          <div className="mt-stack-lg flex flex-col items-center gap-gutter animate-fade-in-up delay-200">
+            <button
+              onClick={handleContinue}
+              disabled={!selected}
+              className="btn-primary px-12 py-5 h-auto text-body-md"
+            >
+              Continue Journey
+            </button>
+
+            {/* Dots indicator */}
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 rounded-full bg-primary" />
+              <div className="w-2 h-2 rounded-full bg-outline-variant" />
+              <div className="w-2 h-2 rounded-full bg-outline-variant" />
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <Footer />
+    </div>
+  );
+}
