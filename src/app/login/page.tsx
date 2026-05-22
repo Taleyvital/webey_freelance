@@ -9,32 +9,34 @@ import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import Footer from "@/components/layout/Footer";
 
 export default function LoginPage() {
-  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  async function handlePhoneSubmit(e: React.FormEvent) {
+  async function handleEmailSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!phone.trim()) return;
+    if (!email.trim()) return;
     setLoading(true);
     setError(null);
 
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithOtp({
-      phone: phone.replace(/\s/g, ""),
+      email: email.trim(),
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
     });
 
     setLoading(false);
 
     if (error) {
-      setError("Impossible d'envoyer le code. Vérifie le numéro.");
+      setError("Impossible d'envoyer le lien. Vérifie l'adresse email.");
       return;
     }
 
-    // Store phone in sessionStorage for the verify page
-    sessionStorage.setItem("webey_otp_phone", phone.replace(/\s/g, ""));
+    sessionStorage.setItem("webey_magic_email", email.trim());
     router.push("/login/verify");
   }
 
@@ -77,18 +79,21 @@ export default function LoginPage() {
           </div>
 
           <div className="space-y-stack-md">
-            {/* Phone form */}
-            <form className="space-y-gutter" onSubmit={handlePhoneSubmit}>
+            {/* Email form */}
+            <form className="space-y-gutter" onSubmit={handleEmailSubmit}>
               <div className="text-left">
-                <label className="block text-label-md font-medium mb-2 ml-4 text-on-surface-variant" htmlFor="phone">
-                  Phone number
+                <label
+                  className="block text-label-md font-medium mb-2 ml-4 text-on-surface-variant"
+                  htmlFor="email"
+                >
+                  Email address
                 </label>
                 <input
-                  id="phone"
-                  type="tel"
-                  placeholder="+234 800 000 0000"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  id="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   className="input-pill"
                 />
@@ -100,7 +105,7 @@ export default function LoginPage() {
 
               <button
                 type="submit"
-                disabled={loading || !phone.trim()}
+                disabled={loading || !email.trim()}
                 className="btn-primary w-full"
               >
                 {loading ? (
@@ -108,7 +113,7 @@ export default function LoginPage() {
                     progress_activity
                   </span>
                 ) : (
-                  "Continue"
+                  "Send magic link"
                 )}
               </button>
             </form>
