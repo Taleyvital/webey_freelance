@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase-browser";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import Footer from "@/components/layout/Footer";
 
@@ -11,19 +12,37 @@ type Role = "client" | "freelancer" | null;
 
 export default function OnboardingPage() {
   const [selected, setSelected] = useState<Role>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
-  function handleContinue() {
+  async function handleContinue() {
     if (!selected) return;
-    if (selected === "client") router.push("/client/dashboard");
-    else router.push("/freelancer/dashboard");
+    setLoading(true);
+    setError(null);
+
+    const supabase = createClient();
+
+    // Save role in Supabase user metadata
+    const { error } = await supabase.auth.updateUser({
+      data: { role: selected },
+    });
+
+    if (error) {
+      setError("Une erreur est survenue. Réessaie.");
+      setLoading(false);
+      return;
+    }
+
+    router.replace(
+      selected === "client" ? "/client/dashboard" : "/freelancer/dashboard"
+    );
   }
 
   return (
     <div className="bg-background text-on-background flex flex-col min-h-screen">
       <AmbientBlobs />
 
-      {/* Nav */}
       <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
         <div className="flex items-center justify-center h-20 page-container">
           <Link href="/" className="flex items-center gap-2">
@@ -37,7 +56,6 @@ export default function OnboardingPage() {
 
       <main className="flex-grow flex items-center justify-center w-full px-6 md:px-16 pt-28 pb-stack-lg">
         <div className="max-w-[800px] w-full">
-          {/* Header */}
           <div className="text-center mb-stack-lg animate-fade-in-up">
             <h1 className="text-headline-lg font-semibold text-on-surface mb-4">
               Who are you?
@@ -47,7 +65,6 @@ export default function OnboardingPage() {
             </p>
           </div>
 
-          {/* Selection grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter animate-fade-in-up delay-100">
             {/* Client */}
             <button
@@ -100,17 +117,25 @@ export default function OnboardingPage() {
             </button>
           </div>
 
-          {/* CTA */}
+          {error && (
+            <p className="text-label-md text-error text-center mt-4">{error}</p>
+          )}
+
           <div className="mt-stack-lg flex flex-col items-center gap-gutter animate-fade-in-up delay-200">
             <button
               onClick={handleContinue}
-              disabled={!selected}
-              className="btn-primary px-12 py-5 h-auto text-body-md"
+              disabled={!selected || loading}
+              className="btn-primary px-12 h-14 text-body-md"
             >
-              Continue Journey
+              {loading ? (
+                <span className="material-symbols-outlined animate-spin text-[20px]">
+                  progress_activity
+                </span>
+              ) : (
+                "Continue Journey"
+              )}
             </button>
 
-            {/* Dots indicator */}
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-primary" />
               <div className="w-2 h-2 rounded-full bg-outline-variant" />
