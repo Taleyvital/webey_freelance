@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase-server";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
+  const type = searchParams.get("type");
   const next = searchParams.get("next") ?? "/onboarding";
 
   if (code) {
@@ -11,6 +12,11 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error) {
+      // Password reset flow
+      if (type === "recovery") {
+        return NextResponse.redirect(`${origin}/reset-password`);
+      }
+
       // Check if user already has a role (returning user)
       const { data: { user } } = await supabase.auth.getUser();
       const role = user?.user_metadata?.role;
