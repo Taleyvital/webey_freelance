@@ -33,7 +33,7 @@ export default function VerifyPage() {
     const supabase = createClient();
     await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      options: { emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin}/auth/callback` },
     });
     setResendLoading(false);
     setResendDone(true);
