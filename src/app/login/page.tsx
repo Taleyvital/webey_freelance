@@ -71,10 +71,10 @@ export default function LoginPage() {
         <div className="w-full max-w-[400px] text-center animate-fade-in-up">
           <div className="mb-stack-lg">
             <h2 className="text-headline-lg font-semibold text-on-surface mb-2">
-              Get any digital service instantly
+              Obtenez n&apos;importe quel service digital instantanément
             </h2>
             <p className="text-body-md text-on-surface-variant">
-              Africa&apos;s premium digital services platform.
+              La plateforme premium de services digitaux en Afrique.
             </p>
           </div>
 
@@ -86,7 +86,7 @@ export default function LoginPage() {
                   className="block text-label-md font-medium mb-2 ml-4 text-on-surface-variant"
                   htmlFor="email"
                 >
-                  Email address
+                  Adresse email
                 </label>
                 <input
                   id="email"
@@ -113,7 +113,7 @@ export default function LoginPage() {
                     progress_activity
                   </span>
                 ) : (
-                  "Send magic link"
+                  "Envoyer le lien magique"
                 )}
               </button>
             </form>
@@ -143,7 +143,7 @@ export default function LoginPage() {
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 6.23l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                 </svg>
               )}
-              Continue with Google
+              Continuer avec Google
             </button>
           </div>
         </div>

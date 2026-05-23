@@ -58,10 +58,10 @@ export default function OnboardingPage() {
         <div className="max-w-[800px] w-full">
           <div className="text-center mb-stack-lg animate-fade-in-up">
             <h1 className="text-headline-lg font-semibold text-on-surface mb-4">
-              Who are you?
+              Qui êtes-vous ?
             </h1>
             <p className="text-body-lg text-on-surface-variant max-w-[500px] mx-auto">
-              Choose the path that best describes your goals. We&apos;ll tailor your experience accordingly.
+              Choisissez le parcours qui correspond à vos objectifs. Nous adapterons votre expérience en conséquence.
             </p>
           </div>
 
@@ -82,7 +82,7 @@ export default function OnboardingPage() {
               </div>
               <h3 className="text-headline-md font-medium text-on-surface mb-2">Client</h3>
               <p className="text-body-md text-on-surface-variant">
-                I want to hire magical talent and build amazing digital products.
+                Je veux recruter des talents et créer des produits digitaux exceptionnels.
               </p>
               {selected === "client" && (
                 <div className="mt-stack-md">
@@ -107,7 +107,7 @@ export default function OnboardingPage() {
               </div>
               <h3 className="text-headline-md font-medium text-on-surface mb-2">Freelancer</h3>
               <p className="text-body-md text-on-surface-variant">
-                I am a digital artisan ready to contribute magic to premium projects.
+                Je suis un artisan digital prêt à contribuer à des projets premium.
               </p>
               {selected === "freelancer" && (
                 <div className="mt-stack-md">
@@ -132,7 +132,7 @@ export default function OnboardingPage() {
                   progress_activity
                 </span>
               ) : (
-                "Continue Journey"
+                "Continuer"
               )}
             </button>
 

@@ -8,35 +8,35 @@ import PillBadge from "@/components/ui/PillBadge";
 const orders = [
   {
     id: "ord_001",
-    service: "Logo Design",
+    service: "Création de logo",
     freelancer: "Amara K.",
     status: "in_progress",
-    statusLabel: "In Progress",
-    price: "25,000 FCFA",
+    statusLabel: "En cours",
+    price: "25 000 FCFA",
     progress: 60,
-    dueDate: "May 24, 2025",
+    dueDate: "24 mai 2025",
     category: "Branding",
   },
   {
     id: "ord_002",
-    service: "Landing Page Development",
+    service: "Développement Landing Page",
     freelancer: "Segun A.",
     status: "review",
-    statusLabel: "In Review",
-    price: "85,000 FCFA",
+    statusLabel: "En révision",
+    price: "85 000 FCFA",
     progress: 90,
-    dueDate: "May 26, 2025",
-    category: "Development",
+    dueDate: "26 mai 2025",
+    category: "Développement",
   },
   {
     id: "ord_003",
-    service: "Social Media Pack",
+    service: "Pack Réseaux Sociaux",
     freelancer: "Fatou D.",
     status: "success",
-    statusLabel: "Delivered",
-    price: "15,000 FCFA",
+    statusLabel: "Livré",
+    price: "15 000 FCFA",
     progress: 100,
-    dueDate: "May 20, 2025",
+    dueDate: "20 mai 2025",
     category: "Design",
   },
 ];
@@ -56,8 +56,8 @@ export default function OrdersPage() {
       <main className="flex-grow pt-28 pb-stack-lg">
         <div className="page-container">
           <div className="mb-stack-lg animate-fade-in-up">
-            <h1 className="text-headline-lg font-semibold text-on-surface mb-2">Your Orders</h1>
-            <p className="text-body-md text-on-surface-variant">Track every service in real-time.</p>
+            <h1 className="text-headline-lg font-semibold text-on-surface mb-2">Vos commandes</h1>
+            <p className="text-body-md text-on-surface-variant">Suivez chaque service en temps réel.</p>
           </div>
 
           <div className="space-y-4 animate-fade-in-up delay-100">
@@ -70,7 +70,7 @@ export default function OrdersPage() {
                     </div>
                     <h3 className="text-body-lg font-medium text-on-surface">{order.service}</h3>
                     <p className="text-label-md text-on-surface-variant mt-1">
-                      by {order.freelancer} · Due {order.dueDate}
+                      par {order.freelancer} · Livraison le {order.dueDate}
                     </p>
                   </div>
                   <div className="text-right shrink-0">
@@ -92,7 +92,7 @@ export default function OrdersPage() {
                     style={{ width: `${order.progress}%` }}
                   />
                 </div>
-                <p className="text-label-md text-on-surface-variant mt-2">{order.progress}% complete</p>
+                <p className="text-label-md text-on-surface-variant mt-2">{order.progress}% terminé</p>
               </div>
             ))}
           </div>

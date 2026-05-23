@@ -9,15 +9,15 @@ interface NavBarProps {
 }
 
 const freelancerLinks = [
-  { href: "/freelancer/dashboard", label: "Dashboard" },
-  { href: "/freelancer/active-work", label: "Work" },
-  { href: "/freelancer/earnings", label: "Earnings" },
+  { href: "/freelancer/dashboard", label: "Tableau de bord" },
+  { href: "/freelancer/active-work", label: "Travaux" },
+  { href: "/freelancer/earnings", label: "Revenus" },
 ];
 
 const clientLinks = [
-  { href: "/client/dashboard", label: "Dashboard" },
-  { href: "/client/request", label: "New Request" },
-  { href: "/client/orders", label: "Orders" },
+  { href: "/client/dashboard", label: "Tableau de bord" },
+  { href: "/client/request", label: "Nouvelle demande" },
+  { href: "/client/orders", label: "Commandes" },
 ];
 
 export default function NavBar({ role }: NavBarProps) {

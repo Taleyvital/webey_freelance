@@ -9,50 +9,50 @@ import PillBadge from "@/components/ui/PillBadge";
 const projects = [
   {
     id: "proj_001",
-    title: "E-commerce Brand Identity",
+    title: "Identité de marque E-commerce",
     client: "Kofi M.",
-    description: "Finalizing the visual guidelines and logo system for the 2024 launch.",
+    description: "Finalisation des guidelines visuelles et du système de logo pour le lancement.",
     timer: "04h 12m",
     progress: 75,
-    deadline: "May 24",
+    deadline: "24 mai",
     status: "urgent",
     statusLabel: "Urgent",
     isActive: true,
   },
   {
     id: "proj_002",
-    title: "Wellness App UI Design",
+    title: "Design UI App Bien-être",
     client: "Ngozi A.",
-    description: "Creating the high-fidelity prototypes for the patient monitoring dashboard.",
+    description: "Création des prototypes haute-fidélité pour le tableau de bord de suivi patient.",
     timer: "23h 45m",
     progress: 45,
-    deadline: "May 28",
+    deadline: "28 mai",
     status: "in_progress",
-    statusLabel: "In Progress",
+    statusLabel: "En cours",
     isActive: false,
   },
   {
     id: "proj_003",
-    title: "Portfolio Site Development",
+    title: "Développement Site Portfolio",
     client: "Moussa T.",
-    description: "Building a Next.js portfolio with Framer Motion animations.",
+    description: "Création d'un portfolio Next.js avec animations Framer Motion.",
     timer: "—",
     progress: 20,
-    deadline: "Jun 2",
+    deadline: "2 juin",
     status: "pending",
-    statusLabel: "Not Started",
+    statusLabel: "Non démarré",
     isActive: false,
   },
   {
     id: "proj_004",
-    title: "Illustration Set",
+    title: "Set d'illustrations",
     client: "Fatou D.",
-    description: "12 custom illustrations for a children's educational app.",
+    description: "12 illustrations personnalisées pour une app éducative pour enfants.",
     timer: "—",
     progress: 10,
-    deadline: "Jun 5",
+    deadline: "5 juin",
     status: "pending",
-    statusLabel: "Not Started",
+    statusLabel: "Non démarré",
     isActive: false,
   },
 ];
@@ -75,19 +75,19 @@ export default function ActiveWorkPage() {
         <div className="page-container">
           {/* Header */}
           <div className="mb-stack-lg animate-fade-in-up">
-            <h1 className="text-headline-lg font-semibold text-on-surface mb-2">Current Workload</h1>
+            <h1 className="text-headline-lg font-semibold text-on-surface mb-2">Charge de travail actuelle</h1>
             <p className="text-body-lg text-on-surface-variant max-w-2xl">
-              You have {projects.filter(p => p.isActive || p.status === "in_progress").length} active milestones today.
-              Focus on the Brand Identity project first; the deadline is approaching.
+              Vous avez {projects.filter(p => p.isActive || p.status === "in_progress").length} jalons actifs aujourd&apos;hui.
+              Concentrez-vous d&apos;abord sur le projet d&apos;identité de marque ; la date limite approche.
             </p>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-gutter mb-stack-lg animate-fade-in-up delay-100">
             {[
-              { value: "$4,250", label: "Earned", icon: "payments" },
+              { value: "4 250 $", label: "Gagné", icon: "payments" },
               { value: "98%", label: "Satisfaction", icon: "star" },
-              { value: "12", label: "Delivered", icon: "check_circle" },
+              { value: "12", label: "Livrés", icon: "check_circle" },
             ].map((s) => (
               <div key={s.label} className="card text-center">
                 <span className="material-symbols-outlined text-primary text-[24px] mb-1">{s.icon}</span>
@@ -146,7 +146,7 @@ export default function ActiveWorkPage() {
                 {/* Progress */}
                 <div className="mt-4">
                   <div className="flex justify-between text-label-md text-on-surface-variant mb-2">
-                    <span>Progress</span>
+                    <span>Progression</span>
                     <span>{project.progress}%</span>
                   </div>
                   <div className="w-full bg-surface-container-high rounded-full h-1.5 overflow-hidden">
@@ -164,7 +164,7 @@ export default function ActiveWorkPage() {
                   <div className="mt-4 pt-4 border-t border-surface-container/40">
                     <button className="btn-primary w-full gap-2">
                       <span className="material-symbols-outlined text-[20px]">upload</span>
-                      Upload Delivery
+                      Livrer le travail
                     </button>
                   </div>
                 )}

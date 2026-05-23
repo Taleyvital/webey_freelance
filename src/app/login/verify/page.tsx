@@ -64,10 +64,10 @@ export default function VerifyPage() {
           </div>
 
           <h2 className="text-headline-lg font-semibold text-on-surface mb-3">
-            Check your inbox
+            Vérifiez votre boîte mail
           </h2>
           <p className="text-body-md text-on-surface-variant mb-2">
-            We sent a magic link to
+            Nous avons envoyé un lien magique à
           </p>
           <p className="text-body-lg font-medium text-on-surface mb-stack-lg">
             {email}
@@ -76,9 +76,9 @@ export default function VerifyPage() {
           {/* Steps */}
           <div className="card text-left space-y-4 mb-stack-lg">
             {[
-              { icon: "inbox", text: "Open the email from Webey" },
-              { icon: "link", text: "Click the magic link inside" },
-              { icon: "check_circle", text: "You're in — no password needed" },
+              { icon: "inbox", text: "Ouvrez l'email de Webey" },
+              { icon: "link", text: "Cliquez sur le lien magique" },
+              { icon: "check_circle", text: "Vous êtes connecté — aucun mot de passe requis" },
             ].map((step, i) => (
               <div key={i} className="flex items-center gap-4">
                 <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
@@ -92,7 +92,7 @@ export default function VerifyPage() {
           {/* Resend */}
           {resendDone && (
             <p className="text-label-md text-green-600 mb-4">
-              ✓ New link sent!
+              ✓ Nouveau lien envoyé !
             </p>
           )}
 
@@ -102,10 +102,10 @@ export default function VerifyPage() {
             className="text-label-md text-on-surface-variant hover:text-primary transition-colors disabled:opacity-50 mb-6"
           >
             {resendLoading
-              ? "Sending..."
+              ? "Envoi..."
               : resendCooldown > 0
-              ? `Resend in ${resendCooldown}s`
-              : "Resend magic link"}
+              ? `Renvoyer dans ${resendCooldown}s`
+              : "Renvoyer le lien magique"}
           </button>
 
           <div>
@@ -113,7 +113,7 @@ export default function VerifyPage() {
               href="/login"
               className="text-label-md text-on-surface-variant hover:text-primary transition-colors"
             >
-              ← Use a different email
+              ← Utiliser une autre adresse
             </Link>
           </div>
         </div>

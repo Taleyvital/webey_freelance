@@ -5,14 +5,14 @@ export default function Footer() {
     <footer className="w-full py-stack-md bg-background/80 border-t border-surface-container/40 mt-auto">
       <div className="flex flex-col md:flex-row justify-between items-center gap-3 page-container">
         <span className="text-label-md text-on-surface-variant">
-          © 2025 Webey Digital Magic. Made for Africa.
+          © 2025 Webey Digital Magic. Fait pour l&apos;Afrique.
         </span>
         <div className="flex gap-8">
           <Link href="#" className="text-label-md text-on-surface-variant hover:text-primary transition-colors">
-            Terms
+            Conditions
           </Link>
           <Link href="#" className="text-label-md text-on-surface-variant hover:text-primary transition-colors">
-            Privacy
+            Confidentialité
           </Link>
           <Link href="#" className="text-label-md text-on-surface-variant hover:text-primary transition-colors">
             Support

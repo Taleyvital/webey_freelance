@@ -9,30 +9,30 @@ import PillBadge from "@/components/ui/PillBadge";
 const recentOrders = [
   {
     id: "ord_001",
-    service: "Logo Design",
+    service: "Création de logo",
     freelancer: "Amara K.",
     status: "in_progress",
-    statusLabel: "In Progress",
-    price: "25,000 FCFA",
-    dueDate: "May 24",
+    statusLabel: "En cours",
+    price: "25 000 FCFA",
+    dueDate: "24 mai",
   },
   {
     id: "ord_002",
-    service: "Landing Page Dev",
+    service: "Développement Landing Page",
     freelancer: "Segun A.",
     status: "review",
-    statusLabel: "In Review",
-    price: "85,000 FCFA",
-    dueDate: "May 26",
+    statusLabel: "En révision",
+    price: "85 000 FCFA",
+    dueDate: "26 mai",
   },
   {
     id: "ord_003",
-    service: "Social Media Pack",
+    service: "Pack Réseaux Sociaux",
     freelancer: "Fatou D.",
     status: "success",
-    statusLabel: "Delivered",
-    price: "15,000 FCFA",
-    dueDate: "May 20",
+    statusLabel: "Livré",
+    price: "15 000 FCFA",
+    dueDate: "20 mai",
   },
 ];
 
@@ -52,26 +52,26 @@ export default function ClientDashboard() {
         <div className="page-container">
           {/* Welcome + CTA */}
           <div className="mb-stack-lg animate-fade-in-up">
-            <p className="text-label-md text-on-surface-variant mb-1">Good morning</p>
+            <p className="text-label-md text-on-surface-variant mb-1">Bonjour</p>
             <h1 className="text-headline-lg font-semibold text-on-surface mb-gutter">
-              What do you need today?
+              De quoi avez-vous besoin aujourd&apos;hui ?
             </h1>
             <Link
               href="/client/request"
               className="btn-primary inline-flex gap-2"
             >
               <span className="material-symbols-outlined text-[20px]">add_circle</span>
-              New Request
+              Nouvelle demande
             </Link>
           </div>
 
           {/* Stats row */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-gutter mb-stack-lg animate-fade-in-up delay-100">
             {[
-              { label: "Active Orders", value: "2", icon: "work" },
-              { label: "Delivered", value: "12", icon: "check_circle" },
-              { label: "Spent", value: "340K FCFA", icon: "payments" },
-              { label: "Avg. Rating", value: "4.9", icon: "star" },
+              { label: "Commandes actives", value: "2", icon: "work" },
+              { label: "Livrées", value: "12", icon: "check_circle" },
+              { label: "Dépensé", value: "340K FCFA", icon: "payments" },
+              { label: "Note moyenne", value: "4.9", icon: "star" },
             ].map((stat) => (
               <div key={stat.label} className="card">
                 <span className="material-symbols-outlined text-primary text-[24px] mb-2">{stat.icon}</span>
@@ -84,9 +84,9 @@ export default function ClientDashboard() {
           {/* Recent orders */}
           <div className="animate-fade-in-up delay-200">
             <div className="flex items-center justify-between mb-gutter">
-              <h2 className="text-headline-md font-medium text-on-surface">Recent Orders</h2>
+              <h2 className="text-headline-md font-medium text-on-surface">Commandes récentes</h2>
               <Link href="/client/orders" className="text-label-md text-primary hover:underline">
-                View all
+                Voir tout
               </Link>
             </div>
 
@@ -96,7 +96,7 @@ export default function ClientDashboard() {
                   <div className="flex-1 min-w-0">
                     <p className="text-body-md font-medium text-on-surface truncate">{order.service}</p>
                     <p className="text-label-md text-on-surface-variant mt-1">
-                      by {order.freelancer} · Due {order.dueDate}
+                      par {order.freelancer} · Rendu le {order.dueDate}
                     </p>
                   </div>
                   <div className="flex items-center gap-4 shrink-0">

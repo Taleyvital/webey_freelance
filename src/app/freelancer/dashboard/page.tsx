@@ -9,25 +9,25 @@ import PillBadge from "@/components/ui/PillBadge";
 const incomingRequests = [
   {
     id: "req_001",
-    service: "Mobile App UI Design",
-    budget: "60,000 – 90,000 FCFA",
-    deadline: "3 days",
+    service: "Design UI App Mobile",
+    budget: "60 000 – 90 000 FCFA",
+    deadline: "3 jours",
     category: "UI/UX",
     client: "Kofi M.",
   },
   {
     id: "req_002",
-    service: "E-commerce Website",
-    budget: "120,000 – 180,000 FCFA",
-    deadline: "7 days",
-    category: "Development",
+    service: "Site E-commerce",
+    budget: "120 000 – 180 000 FCFA",
+    deadline: "7 jours",
+    category: "Développement",
     client: "Ngozi A.",
   },
   {
     id: "req_003",
-    service: "Brand Identity Package",
-    budget: "45,000 – 75,000 FCFA",
-    deadline: "5 days",
+    service: "Pack Identité de marque",
+    budget: "45 000 – 75 000 FCFA",
+    deadline: "5 jours",
     category: "Branding",
     client: "Moussa T.",
   },
@@ -43,16 +43,16 @@ export default function FreelancerDashboard() {
         <div className="page-container">
           {/* Welcome */}
           <div className="mb-stack-lg animate-fade-in-up">
-            <p className="text-label-md text-on-surface-variant mb-1">Welcome back</p>
-            <h1 className="text-headline-lg font-semibold text-on-surface">Dashboard</h1>
+            <p className="text-label-md text-on-surface-variant mb-1">Bon retour</p>
+            <h1 className="text-headline-lg font-semibold text-on-surface">Tableau de bord</h1>
           </div>
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-gutter mb-stack-lg animate-fade-in-up delay-100">
             {[
-              { value: "$4,250", label: "This Month", icon: "payments", accent: "text-primary" },
+              { value: "4 250 $", label: "Ce mois-ci", icon: "payments", accent: "text-primary" },
               { value: "98%", label: "Satisfaction", icon: "star", accent: "text-amber-500" },
-              { value: "12", label: "Active Projects", icon: "work", accent: "text-secondary" },
+              { value: "12", label: "Projets actifs", icon: "work", accent: "text-secondary" },
             ].map((s) => (
               <div key={s.label} className="card">
                 <span className={`material-symbols-outlined ${s.accent} text-[24px] mb-2`}>{s.icon}</span>
@@ -65,8 +65,8 @@ export default function FreelancerDashboard() {
           {/* Incoming requests */}
           <div className="animate-fade-in-up delay-200">
             <div className="flex items-center justify-between mb-gutter">
-              <h2 className="text-headline-md font-medium text-on-surface">Incoming Requests</h2>
-              <span className="text-label-md text-on-surface-variant">{incomingRequests.length} new</span>
+              <h2 className="text-headline-md font-medium text-on-surface">Nouvelles demandes</h2>
+              <span className="text-label-md text-on-surface-variant">{incomingRequests.length} nouvelles</span>
             </div>
 
             <div className="space-y-4">
@@ -79,7 +79,7 @@ export default function FreelancerDashboard() {
                       </div>
                       <h3 className="text-body-lg font-medium text-on-surface mt-2">{req.service}</h3>
                       <p className="text-label-md text-on-surface-variant mt-1">
-                        from {req.client} · Due in {req.deadline}
+                        de {req.client} · Sous {req.deadline}
                       </p>
                     </div>
                     <div className="text-right shrink-0">
@@ -93,10 +93,10 @@ export default function FreelancerDashboard() {
                   {/* Accept/decline */}
                   <div className="flex gap-3 mt-4 pt-4 border-t border-surface-container/40">
                     <button className="btn-primary h-10 px-5 text-label-md flex-1">
-                      Accept
+                      Accepter
                     </button>
                     <button className="btn-secondary h-10 px-5 text-label-md">
-                      Decline
+                      Décliner
                     </button>
                   </div>
                 </div>
@@ -111,8 +111,8 @@ export default function FreelancerDashboard() {
                 <span className="material-symbols-outlined text-primary text-[24px]">task_alt</span>
               </div>
               <div>
-                <p className="text-body-md font-medium text-on-surface">Active Work</p>
-                <p className="text-label-md text-on-surface-variant">4 milestones</p>
+                <p className="text-body-md font-medium text-on-surface">Travaux en cours</p>
+                <p className="text-label-md text-on-surface-variant">4 jalons</p>
               </div>
             </Link>
             <Link href="/freelancer/earnings" className="card hover:shadow-ambient-md transition-shadow flex items-center gap-4">
@@ -120,8 +120,8 @@ export default function FreelancerDashboard() {
                 <span className="material-symbols-outlined text-secondary text-[24px]">account_balance_wallet</span>
               </div>
               <div>
-                <p className="text-body-md font-medium text-on-surface">Earnings</p>
-                <p className="text-label-md text-on-surface-variant">$42,850 total</p>
+                <p className="text-body-md font-medium text-on-surface">Revenus</p>
+                <p className="text-label-md text-on-surface-variant">42 850 $ au total</p>
               </div>
             </Link>
           </div>
