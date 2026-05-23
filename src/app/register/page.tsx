@@ -8,35 +8,59 @@ import { createClient } from "@/lib/supabase-browser";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import Footer from "@/components/layout/Footer";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [emailSent, setEmailSent] = useState(false);
   const router = useRouter();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!email.trim() || !password) return;
+    if (password !== confirm) {
+      setError("Les mots de passe ne correspondent pas.");
+      return;
+    }
+    if (password.length < 6) {
+      setError("Le mot de passe doit contenir au moins 6 caractères.");
+      return;
+    }
     setLoading(true);
     setError(null);
 
     const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signUp({
       email: email.trim(),
       password,
+      options: {
+        emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin}/auth/callback`,
+      },
     });
 
     setLoading(false);
 
     if (error) {
-      setError("Email ou mot de passe incorrect.");
+      if (error.message.includes("already registered")) {
+        setError("Un compte existe déjà avec cet email.");
+      } else {
+        setError("Erreur lors de l'inscription. Réessayez.");
+      }
       return;
     }
 
-    router.replace("/");
+    // Email confirmation required
+    if (data.user && !data.session) {
+      setEmailSent(true);
+      return;
+    }
+
+    // Logged in immediately (email confirmation disabled in Supabase)
+    router.replace("/onboarding");
     router.refresh();
   }
 
@@ -50,6 +74,41 @@ export default function LoginPage() {
         redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL ?? window.location.origin}/auth/callback`,
       },
     });
+  }
+
+  if (emailSent) {
+    return (
+      <div className="bg-surface-container-lowest flex flex-col min-h-screen">
+        <AmbientBlobs />
+        <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
+          <div className="flex items-center justify-center h-20 page-container">
+            <Link href="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 relative">
+                <Image src="/logo-webey.svg" alt="Webey" fill className="object-contain" priority />
+              </div>
+              <span className="text-headline-md font-semibold text-primary tracking-tighter">Webey</span>
+            </Link>
+          </div>
+        </header>
+        <main className="flex-grow flex items-center justify-center pt-20 px-6">
+          <div className="w-full max-w-[400px] text-center animate-fade-in-up">
+            <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-8">
+              <span className="material-symbols-outlined text-primary text-[40px]">mark_email_unread</span>
+            </div>
+            <h2 className="text-headline-lg font-semibold text-on-surface mb-3">Vérifiez votre boîte mail</h2>
+            <p className="text-body-md text-on-surface-variant mb-2">Un lien de confirmation a été envoyé à</p>
+            <p className="text-body-lg font-medium text-on-surface mb-8">{email}</p>
+            <p className="text-label-md text-on-surface-variant mb-6">
+              Cliquez sur le lien dans l&apos;email pour activer votre compte.
+            </p>
+            <Link href="/login" className="text-label-md text-on-surface-variant hover:text-primary transition-colors">
+              ← Retour à la connexion
+            </Link>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
   return (
@@ -71,10 +130,10 @@ export default function LoginPage() {
         <div className="w-full max-w-[400px] text-center animate-fade-in-up">
           <div className="mb-stack-lg">
             <h2 className="text-headline-lg font-semibold text-on-surface mb-2">
-              Bon retour
+              Créer un compte
             </h2>
             <p className="text-body-md text-on-surface-variant">
-              Connectez-vous à votre compte Webey.
+              Rejoignez la plateforme premium africaine.
             </p>
           </div>
 
@@ -103,7 +162,7 @@ export default function LoginPage() {
                   <input
                     id="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
+                    placeholder="6 caractères minimum"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
@@ -121,27 +180,47 @@ export default function LoginPage() {
                 </div>
               </div>
 
+              <div className="text-left">
+                <label className="block text-label-md font-medium mb-2 ml-4 text-on-surface-variant" htmlFor="confirm">
+                  Confirmer le mot de passe
+                </label>
+                <div className="relative">
+                  <input
+                    id="confirm"
+                    type={showConfirm ? "text" : "password"}
+                    placeholder="••••••••"
+                    value={confirm}
+                    onChange={(e) => setConfirm(e.target.value)}
+                    required
+                    className="input-pill pr-14"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirm((v) => !v)}
+                    className="absolute right-5 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface transition-colors"
+                  >
+                    <span className="material-symbols-outlined text-[20px]">
+                      {showConfirm ? "visibility_off" : "visibility"}
+                    </span>
+                  </button>
+                </div>
+              </div>
+
               {error && (
                 <p className="text-label-md text-error text-left ml-4">{error}</p>
               )}
 
               <button
                 type="submit"
-                disabled={loading || !email.trim() || !password}
+                disabled={loading || !email.trim() || !password || !confirm}
                 className="btn-primary w-full"
               >
                 {loading ? (
                   <span className="material-symbols-outlined animate-spin text-[20px]">progress_activity</span>
                 ) : (
-                  "Se connecter"
+                  "Créer mon compte"
                 )}
               </button>
-
-              <div className="text-right">
-                <Link href="/forgot-password" className="text-label-md text-on-surface-variant hover:text-primary transition-colors">
-                  Mot de passe oublié ?
-                </Link>
-              </div>
             </form>
 
             <div className="flex items-center gap-4 py-2">
@@ -169,9 +248,9 @@ export default function LoginPage() {
             </button>
 
             <p className="text-label-md text-on-surface-variant pt-2">
-              Pas encore de compte ?{" "}
-              <Link href="/register" className="text-primary hover:underline font-medium">
-                S&apos;inscrire
+              Déjà un compte ?{" "}
+              <Link href="/login" className="text-primary hover:underline font-medium">
+                Se connecter
               </Link>
             </p>
           </div>

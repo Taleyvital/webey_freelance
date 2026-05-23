@@ -1,7 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_ROUTES = ["/login", "/login/verify", "/auth/callback"];
+const PUBLIC_ROUTES = ["/login", "/register", "/auth/callback"];
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -49,7 +49,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Authenticated → redirect away from login/verify to dashboard
-  if (pathname === "/login" || pathname === "/login/verify") {
+  if (pathname === "/login" || pathname === "/register") {
     const role = user.user_metadata?.role as "client" | "freelancer" | undefined;
     if (role === "client") return NextResponse.redirect(new URL("/client/dashboard", request.url));
     if (role === "freelancer") return NextResponse.redirect(new URL("/freelancer/dashboard", request.url));
