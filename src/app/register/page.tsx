@@ -48,7 +48,7 @@ export default function RegisterPage() {
       if (error.message.includes("already registered")) {
         setError("Un compte existe déjà avec cet email.");
       } else {
-        setError("Erreur lors de l'inscription. Réessayez.");
+        setError(error.message);
       }
       return;
     }

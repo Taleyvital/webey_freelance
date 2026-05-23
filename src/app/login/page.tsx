@@ -32,7 +32,7 @@ export default function LoginPage() {
     setLoading(false);
 
     if (error) {
-      setError("Email ou mot de passe incorrect.");
+      setError(error.message);
       return;
     }
 
