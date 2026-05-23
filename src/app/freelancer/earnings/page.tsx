@@ -5,11 +5,11 @@ import Footer from "@/components/layout/Footer";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 
 const payments = [
-  { id: "pay_001", project: "E-commerce Brand Identity", client: "Kofi M.", amount: "$1,200", date: "May 20, 2025", type: "completed" },
-  { id: "pay_002", project: "Wellness App UI Design", client: "Ngozi A.", amount: "$2,800", date: "May 15, 2025", type: "completed" },
-  { id: "pay_003", project: "Portfolio Site Dev", client: "Moussa T.", amount: "$950", date: "May 10, 2025", type: "completed" },
-  { id: "pay_004", project: "Illustration Set", client: "Fatou D.", amount: "$600", date: "May 5, 2025", type: "completed" },
-  { id: "pay_005", project: "Mobile App UI", client: "Amadou B.", amount: "$1,800", date: "Apr 28, 2025", type: "completed" },
+  { id: "pay_001", project: "Identité de marque E-commerce", client: "Kofi M.", amount: "720 000 FCFA", date: "20 mai 2025", type: "completed" },
+  { id: "pay_002", project: "Design UI App Bien-être", client: "Ngozi A.", amount: "1 680 000 FCFA", date: "15 mai 2025", type: "completed" },
+  { id: "pay_003", project: "Site Portfolio", client: "Moussa T.", amount: "570 000 FCFA", date: "10 mai 2025", type: "completed" },
+  { id: "pay_004", project: "Set d'illustrations", client: "Fatou D.", amount: "360 000 FCFA", date: "5 mai 2025", type: "completed" },
+  { id: "pay_005", project: "UI App Mobile", client: "Amadou B.", amount: "1 080 000 FCFA", date: "28 avr. 2025", type: "completed" },
 ];
 
 export default function EarningsPage() {
@@ -24,7 +24,7 @@ export default function EarningsPage() {
           <div className="text-center mb-stack-lg animate-fade-in-up">
             <p className="text-label-md text-on-surface-variant mb-2">Total gagné</p>
             <h1 className="text-display-lg-mobile md:text-display-lg font-semibold text-primary tracking-tight">
-              $42,850.00
+              25 700 000 FCFA
             </h1>
             <p className="text-body-md text-on-surface-variant mt-2">
               Revenus totaux sur tous les projets
@@ -34,8 +34,8 @@ export default function EarningsPage() {
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg animate-fade-in-up delay-100">
             {[
-              { label: "Ce mois-ci", value: "12 400 $", icon: "calendar_month", note: "+18% vs mois dernier" },
-              { label: "Cette semaine", value: "3 150 $", icon: "today", note: "3 paiements" },
+              { label: "Ce mois-ci", value: "7 440 000 FCFA", icon: "calendar_month", note: "+18% vs mois dernier" },
+              { label: "Cette semaine", value: "1 890 000 FCFA", icon: "today", note: "3 paiements" },
               { label: "Commandes terminées", value: "142", icon: "check_circle", note: "Depuis toujours" },
             ].map((s) => (
               <div key={s.label} className="card">
@@ -52,7 +52,7 @@ export default function EarningsPage() {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <h3 className="text-headline-md font-medium text-on-surface">Disponible au retrait</h3>
-                <p className="text-display-lg-mobile font-semibold text-primary mt-1">8 400,00 $</p>
+                <p className="text-display-lg-mobile font-semibold text-primary mt-1">5 040 000 FCFA</p>
                 <p className="text-label-md text-on-surface-variant mt-1">Généralement instantané · Sans frais</p>
               </div>
               <button className="btn-primary gap-2 shrink-0">

@@ -85,7 +85,7 @@ export default function ActiveWorkPage() {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-gutter mb-stack-lg animate-fade-in-up delay-100">
             {[
-              { value: "4 250 $", label: "Gagné", icon: "payments" },
+              { value: "2 550 000 FCFA", label: "Gagné", icon: "payments" },
               { value: "98%", label: "Satisfaction", icon: "star" },
               { value: "12", label: "Livrés", icon: "check_circle" },
             ].map((s) => (

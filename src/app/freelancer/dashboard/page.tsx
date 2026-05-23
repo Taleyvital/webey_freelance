@@ -50,7 +50,7 @@ export default function FreelancerDashboard() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-gutter mb-stack-lg animate-fade-in-up delay-100">
             {[
-              { value: "4 250 $", label: "Ce mois-ci", icon: "payments", accent: "text-primary" },
+              { value: "2 550 000 FCFA", label: "Ce mois-ci", icon: "payments", accent: "text-primary" },
               { value: "98%", label: "Satisfaction", icon: "star", accent: "text-amber-500" },
               { value: "12", label: "Projets actifs", icon: "work", accent: "text-secondary" },
             ].map((s) => (
@@ -121,7 +121,7 @@ export default function FreelancerDashboard() {
               </div>
               <div>
                 <p className="text-body-md font-medium text-on-surface">Revenus</p>
-                <p className="text-label-md text-on-surface-variant">42 850 $ au total</p>
+                <p className="text-label-md text-on-surface-variant">25 700 000 FCFA au total</p>
               </div>
             </Link>
           </div>
