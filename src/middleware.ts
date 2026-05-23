@@ -6,12 +6,10 @@ const PUBLIC_ROUTES = ["/login", "/login/verify", "/auth/callback"];
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Allow public routes and static files
+  // Always allow static files and API routes
   if (
-    PUBLIC_ROUTES.some((r) => pathname.startsWith(r)) ||
     pathname.startsWith("/_next") ||
-    pathname.startsWith("/api") ||
-    pathname === "/"
+    pathname.startsWith("/api")
   ) {
     return NextResponse.next();
   }
@@ -42,9 +40,20 @@ export async function middleware(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Not authenticated → redirect to login
+  const isPublic = PUBLIC_ROUTES.some((r) => pathname.startsWith(r)) || pathname === "/";
+
+  // Not authenticated → allow public routes, block the rest
   if (!user) {
+    if (isPublic) return response;
     return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // Authenticated → redirect away from login/verify to dashboard
+  if (pathname === "/login" || pathname === "/login/verify") {
+    const role = user.user_metadata?.role as "client" | "freelancer" | undefined;
+    if (role === "client") return NextResponse.redirect(new URL("/client/dashboard", request.url));
+    if (role === "freelancer") return NextResponse.redirect(new URL("/freelancer/dashboard", request.url));
+    return NextResponse.redirect(new URL("/onboarding", request.url));
   }
 
   const role = user.user_metadata?.role as "client" | "freelancer" | undefined;
