@@ -58,30 +58,63 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="bg-surface-container-lowest text-on-surface flex flex-col min-h-screen">
-      <AmbientBlobs />
+    <div className="bg-surface-container-lowest text-on-surface flex min-h-screen">
 
-      <header className="fixed top-0 left-0 right-0 z-50 glass-nav">
-        <div className="flex items-center justify-center h-20 page-container">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 relative">
-              <Image src="/logo-webey.svg" alt="Webey" fill className="object-contain" priority />
-            </div>
-            <span className="text-headline-md font-semibold text-primary tracking-tighter">Webey</span>
-          </Link>
-        </div>
-      </header>
-
-      <main className="flex-grow flex items-center justify-center pt-safe-nav px-6">
-        <div className="w-full max-w-[400px] text-center animate-fade-in-up">
-          <div className="mb-stack-lg">
-            <h2 className="text-headline-lg font-semibold text-on-surface mb-2">
-              Bon retour
-            </h2>
-            <p className="text-body-md text-on-surface-variant">
-              Connectez-vous à votre compte Webey.
-            </p>
+      {/* Hero vidéo — visible uniquement sur desktop (lg+) */}
+      <div className="hidden lg:block lg:w-1/2 xl:w-3/5 relative overflow-hidden">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/video/video-hero-chemise-jaune-h264.mp4" type="video/mp4" />
+          <source src="/video/video-hero-chemise-jaune.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay gradient pour lisibilité */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent" />
+        {/* Logo superposé sur la vidéo */}
+        <div className="absolute top-8 left-8 flex items-center gap-2 z-10">
+          <div className="w-8 h-8 relative">
+            <Image src="/logo-webey.svg" alt="Webey" fill className="object-contain brightness-0 invert" priority />
           </div>
+          <span className="text-headline-md font-semibold text-white tracking-tighter">Webey</span>
+        </div>
+        {/* Tagline en bas de la vidéo */}
+        <div className="absolute bottom-10 left-8 z-10">
+          <p className="text-white text-xl font-semibold leading-snug max-w-xs drop-shadow">
+            Trouvez le freelance qu&apos;il vous faut, rapidement.
+          </p>
+        </div>
+      </div>
+
+      {/* Panneau formulaire */}
+      <div className="flex flex-col flex-1 min-h-screen">
+        <AmbientBlobs />
+
+        <header className="fixed top-0 left-0 right-0 lg:left-auto lg:right-0 lg:w-1/2 xl:w-2/5 z-50 glass-nav">
+          <div className="flex items-center justify-center lg:justify-center h-20 page-container">
+            {/* Logo mobile uniquement */}
+            <Link href="/" className="flex items-center gap-2 lg:hidden">
+              <div className="w-8 h-8 relative">
+                <Image src="/logo-webey.svg" alt="Webey" fill className="object-contain" priority />
+              </div>
+              <span className="text-headline-md font-semibold text-primary tracking-tighter">Webey</span>
+            </Link>
+          </div>
+        </header>
+
+        <main className="flex-grow flex items-center justify-center pt-safe-nav px-6">
+          <div className="w-full max-w-[400px] text-center animate-fade-in-up">
+            <div className="mb-stack-lg">
+              <h2 className="text-headline-lg font-semibold text-on-surface mb-2">
+                Bon retour
+              </h2>
+              <p className="text-body-md text-on-surface-variant">
+                Connectez-vous à votre compte Webey.
+              </p>
+            </div>
 
           <div className="space-y-stack-md">
             <form className="space-y-gutter" onSubmit={handleSubmit}>
@@ -180,8 +213,9 @@ export default function LoginPage() {
               </Link>
             </p>
           </div>
-        </div>
-      </main>
+          </div>
+        </main>
+      </div>
 
     </div>
   );
