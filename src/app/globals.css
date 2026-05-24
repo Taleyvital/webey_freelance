@@ -23,6 +23,15 @@
     background: rgba(249, 249, 249, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pt-safe-nav {
+    padding-top: calc(5rem + env(safe-area-inset-top));
+  }
+
+  .pt-safe-nav-lg {
+    padding-top: calc(7rem + env(safe-area-inset-top));
   }
 
   .bottom-nav-glass {
