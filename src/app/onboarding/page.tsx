@@ -34,23 +34,22 @@ export default function OnboardingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background overflow-hidden">
 
-      {/* Hero image — grande section haute */}
-      <div className="relative w-full flex-shrink-0" style={{ height: "58vh", minHeight: 320 }}>
-        {/* Fond dégradé africain */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a0533] via-[#0d1b6e] to-[#0058bc]" />
+      {/* Hero vidéo — grande section haute */}
+      <div className="relative w-full flex-shrink-0" style={{ height: "60vh", minHeight: 340 }}>
+        {/* Vidéo en boucle */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/video/video-hero-fille.mp4" type="video/mp4" />
+          <source src="/video/video-hero-chemise-jaune.mp4" type="video/mp4" />
+        </video>
 
-        {/* Motif géométrique décoratif */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-8 left-8 w-40 h-40 rounded-full border-2 border-white" />
-          <div className="absolute top-16 left-16 w-24 h-24 rounded-full border border-white" />
-          <div className="absolute bottom-12 right-8 w-52 h-52 rounded-full border-2 border-white" />
-          <div className="absolute bottom-20 right-16 w-32 h-32 rounded-full border border-white" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full border border-white/30" />
-        </div>
-
-        {/* Blobs lumineux */}
-        <div className="absolute top-1/4 left-1/4 w-48 h-48 rounded-full bg-violet-500/25 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-56 h-56 rounded-full bg-blue-400/20 blur-3xl" />
+        {/* Overlay sombre dégradé */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
 
         {/* Logo Webey */}
         <div className="absolute top-0 left-0 right-0 flex justify-center" style={{ paddingTop: 'calc(env(safe-area-inset-top) + 1.5rem)' }}>
@@ -63,15 +62,12 @@ export default function OnboardingPage() {
         </div>
 
         {/* Contenu central */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
-          <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center mb-6">
-            <span className="material-symbols-outlined text-white text-[32px]">handshake</span>
-          </div>
-          <h1 className="text-white font-bold text-[28px] leading-tight mb-3">
+        <div className="absolute inset-0 flex flex-col items-end justify-end text-center px-8 pb-10">
+          <h1 className="text-white font-bold text-[26px] leading-tight mb-2 w-full">
             Bienvenue sur Webey
           </h1>
-          <p className="text-white/70 text-body-md max-w-[280px] leading-relaxed">
-            La plateforme premium qui connecte les meilleurs talents africains aux projets ambitieux.
+          <p className="text-white/80 text-body-sm max-w-[300px] leading-relaxed w-full">
+            La plateforme qui connecte les meilleurs talents africains aux projets ambitieux.
           </p>
         </div>
 
