@@ -53,7 +53,7 @@ export default function OrdersPage() {
       <AmbientBlobs />
       <NavBar role="client" />
 
-      <main className="flex-grow pt-28 pb-28 md:pb-stack-lg">
+      <main className="flex-grow pt-safe-nav-lg pb-28 md:pb-stack-lg">
         <div className="page-container">
           <div className="mb-stack-lg animate-fade-in-up">
             <h1 className="text-headline-lg font-semibold text-on-surface mb-2">Vos commandes</h1>

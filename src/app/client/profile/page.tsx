@@ -17,7 +17,7 @@ export default function ClientProfilePage() {
       <AmbientBlobs />
       <NavBar role="client" />
 
-      <main className="flex-grow pt-28 pb-28 md:pb-stack-lg">
+      <main className="flex-grow pt-safe-nav-lg pb-28 md:pb-stack-lg">
         <div className="page-container max-w-[720px] mx-auto">
 
           {/* Profile header */}

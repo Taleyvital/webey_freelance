@@ -80,7 +80,7 @@ export default function ResetPasswordPage() {
         </div>
       </header>
 
-      <main className="flex-grow flex items-center justify-center pt-20 px-6">
+      <main className="flex-grow flex items-center justify-center pt-safe-nav px-6">
         <div className="w-full max-w-[400px] text-center animate-fade-in-up">
           <div className="mb-stack-lg">
             <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">

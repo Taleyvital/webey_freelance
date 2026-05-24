@@ -19,7 +19,7 @@ export default function FreelancerProfilePage() {
       <AmbientBlobs />
       <NavBar role="freelancer" />
 
-      <main className="flex-grow pt-28 pb-28 md:pb-stack-lg">
+      <main className="flex-grow pt-safe-nav-lg pb-28 md:pb-stack-lg">
         <div className="page-container max-w-[720px] mx-auto">
           {/* Profile header */}
           <div className="card flex flex-col md:flex-row items-center md:items-start gap-8 mb-stack-lg animate-fade-in-up">

@@ -26,7 +26,7 @@ export default function ClientDashboard() {
       <AmbientBlobs />
       <NavBar role="client" />
 
-      <main className="flex-grow pt-24 pb-32">
+      <main className="flex-grow pt-safe-nav-lg pb-32">
         {/* Category carousel */}
         <div className="max-w-[480px] mx-auto pt-4 mb-6 animate-fade-in-up">
           <div className="flex gap-3 overflow-x-auto px-4 pb-1 scrollbar-hide">

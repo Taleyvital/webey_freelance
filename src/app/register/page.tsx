@@ -89,7 +89,7 @@ export default function RegisterPage() {
             </Link>
           </div>
         </header>
-        <main className="flex-grow flex items-center justify-center pt-20 px-6">
+        <main className="flex-grow flex items-center justify-center pt-safe-nav px-6">
           <div className="w-full max-w-[400px] text-center animate-fade-in-up">
             <div className="w-20 h-20 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-8">
               <span className="material-symbols-outlined text-primary text-[40px]">mark_email_unread</span>
@@ -124,7 +124,7 @@ export default function RegisterPage() {
         </div>
       </header>
 
-      <main className="flex-grow flex items-center justify-center pt-20 px-6">
+      <main className="flex-grow flex items-center justify-center pt-safe-nav px-6">
         <div className="w-full max-w-[400px] text-center animate-fade-in-up">
           <div className="mb-stack-lg">
             <h2 className="text-headline-lg font-semibold text-on-surface mb-2">

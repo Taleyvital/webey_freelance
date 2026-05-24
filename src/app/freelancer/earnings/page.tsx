@@ -18,7 +18,7 @@ export default function EarningsPage() {
       <AmbientBlobs />
       <NavBar role="freelancer" />
 
-      <main className="flex-grow pt-28 pb-28 md:pb-stack-lg">
+      <main className="flex-grow pt-safe-nav-lg pb-28 md:pb-stack-lg">
         <div className="page-container">
           {/* Hero earnings */}
           <div className="text-center mb-stack-lg animate-fade-in-up">
