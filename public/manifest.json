@@ -10,19 +10,19 @@
   "theme_color": "#0058bc",
   "icons": [
     {
-      "src": "/webey-bleu.jpeg",
+      "src": "/webey-black.jpeg",
       "sizes": "192x192",
       "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/webey-bleu.jpeg",
+      "src": "/webey-black.jpeg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/webey-bleu.jpeg",
+      "src": "/webey-black.jpeg",
       "sizes": "1080x1080",
       "type": "image/jpeg",
       "purpose": "maskable"
