@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase-browser";
@@ -12,6 +12,14 @@ export default function OnboardingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.play().catch(() => {});
+  }, []);
 
   async function handleSelect(role: Role) {
     if (!role || loading) return;
@@ -38,15 +46,22 @@ export default function OnboardingPage() {
       <div className="relative w-full flex-shrink-0" style={{ height: "60vh", minHeight: 340 }}>
         {/* Vidéo en boucle */}
         <video
+          ref={videoRef}
           autoPlay
           muted
           loop
           playsInline
+          disablePictureInPicture
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
+          style={{ WebkitPlaysinline: true } as React.CSSProperties}
         >
           <source src="/video/video-hero-fille.mp4" type="video/mp4" />
           <source src="/video/video-hero-chemise-jaune.mp4" type="video/mp4" />
         </video>
+
+        {/* Fallback si vidéo bloquée */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1a0533] via-[#0d1b6e] to-[#0058bc] -z-10" />
 
         {/* Overlay sombre dégradé */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
