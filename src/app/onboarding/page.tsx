@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase-browser";
@@ -12,6 +12,14 @@ export default function OnboardingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    v.play().catch(() => {});
+  }, []);
 
   async function handleSelect(role: Role) {
     if (!role || loading) return;
@@ -34,44 +42,26 @@ export default function OnboardingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background overflow-hidden">
 
-      {/* Hero CSS animé */}
-      <div className="relative w-full flex-shrink-0 overflow-hidden" style={{ height: "60vh", minHeight: 340 }}>
+      {/* Hero vidéo */}
+      <div className="relative w-full flex-shrink-0" style={{ height: "60vh", minHeight: 340 }}>
 
-        {/* Fond dégradé principal */}
-        <div className="absolute inset-0" style={{
-          background: "linear-gradient(135deg, #0d0628 0%, #0a1a6e 40%, #0058bc 75%, #1a7fe8 100%)"
-        }} />
+        {/* Fallback gradient derrière la vidéo */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0d0628] via-[#0a1a6e] to-[#0058bc]" />
 
-        {/* Blob 1 animé */}
-        <div className="absolute rounded-full" style={{
-          width: 320, height: 320,
-          top: "-60px", left: "-80px",
-          background: "radial-gradient(circle, rgba(124,58,237,0.45) 0%, transparent 70%)",
-          animation: "blob-drift 8s ease-in-out infinite",
-        }} />
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/video/video-hero-chemise-jaune-h264.mp4" type="video/mp4" />
+        </video>
 
-        {/* Blob 2 animé */}
-        <div className="absolute rounded-full" style={{
-          width: 280, height: 280,
-          bottom: "20px", right: "-60px",
-          background: "radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 70%)",
-          animation: "blob-drift 10s ease-in-out infinite reverse",
-        }} />
-
-        {/* Blob 3 animé */}
-        <div className="absolute rounded-full" style={{
-          width: 200, height: 200,
-          top: "40%", left: "50%",
-          transform: "translate(-50%, -50%)",
-          background: "radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%)",
-          animation: "blob-drift 6s ease-in-out infinite 2s",
-        }} />
-
-        {/* Grille de points */}
-        <div className="absolute inset-0 opacity-[0.07]" style={{
-          backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
-          backgroundSize: "28px 28px",
-        }} />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/65" />
 
         {/* Logo */}
         <div className="absolute top-0 left-0 right-0 flex justify-center" style={{ paddingTop: "calc(env(safe-area-inset-top) + 1.5rem)" }}>
@@ -86,7 +76,7 @@ export default function OnboardingPage() {
         {/* Texte bas */}
         <div className="absolute bottom-12 left-0 right-0 px-8 text-left">
           <p className="text-white/60 text-label-md font-medium uppercase tracking-widest mb-2">Plateforme premium</p>
-          <h1 className="text-white font-bold text-[28px] leading-tight mb-2">
+          <h1 className="text-white font-bold text-[28px] leading-tight">
             Les meilleurs talents<br />africains, à portée.
           </h1>
         </div>
@@ -107,7 +97,6 @@ export default function OnboardingPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-4 max-w-[480px] mx-auto w-full">
-          {/* Client */}
           <button
             onClick={() => handleSelect("client")}
             disabled={loading}
@@ -117,17 +106,11 @@ export default function OnboardingPage() {
                 : "border-surface-container bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
             }`}
           >
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all ${
-              selected === "client" ? "bg-primary" : "bg-primary/10"
-            }`}>
-              <span className={`material-symbols-outlined text-[28px] ${selected === "client" ? "text-white icon-filled" : "text-primary"}`}>
-                person_search
-              </span>
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all ${selected === "client" ? "bg-primary" : "bg-primary/10"}`}>
+              <span className={`material-symbols-outlined text-[28px] ${selected === "client" ? "text-white icon-filled" : "text-primary"}`}>person_search</span>
             </div>
             <p className="text-body-md font-semibold text-on-surface">Client</p>
-            <p className="text-label-sm text-on-surface-variant mt-1 leading-snug">
-              Je cherche des talents pour mes projets
-            </p>
+            <p className="text-label-sm text-on-surface-variant mt-1 leading-snug">Je cherche des talents pour mes projets</p>
             {selected === "client" && (
               <div className="absolute top-3 right-3">
                 <span className="material-symbols-outlined icon-filled text-primary text-[18px]">check_circle</span>
@@ -135,7 +118,6 @@ export default function OnboardingPage() {
             )}
           </button>
 
-          {/* Freelancer */}
           <button
             onClick={() => handleSelect("freelancer")}
             disabled={loading}
@@ -145,17 +127,11 @@ export default function OnboardingPage() {
                 : "border-surface-container bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
             }`}
           >
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all ${
-              selected === "freelancer" ? "bg-violet-500" : "bg-violet-50"
-            }`}>
-              <span className={`material-symbols-outlined text-[28px] ${selected === "freelancer" ? "text-white icon-filled" : "text-violet-500"}`}>
-                terminal
-              </span>
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all ${selected === "freelancer" ? "bg-violet-500" : "bg-violet-50"}`}>
+              <span className={`material-symbols-outlined text-[28px] ${selected === "freelancer" ? "text-white icon-filled" : "text-violet-500"}`}>terminal</span>
             </div>
             <p className="text-body-md font-semibold text-on-surface">Freelancer</p>
-            <p className="text-label-sm text-on-surface-variant mt-1 leading-snug">
-              Je propose mes services et compétences
-            </p>
+            <p className="text-label-sm text-on-surface-variant mt-1 leading-snug">Je propose mes services et compétences</p>
             {selected === "freelancer" && (
               <div className="absolute top-3 right-3">
                 <span className="material-symbols-outlined icon-filled text-violet-500 text-[18px]">check_circle</span>
@@ -164,24 +140,13 @@ export default function OnboardingPage() {
           </button>
         </div>
 
-        {error && (
-          <p className="text-label-md text-error text-center mt-4">{error}</p>
-        )}
-
+        {error && <p className="text-label-md text-error text-center mt-4">{error}</p>}
         {loading && (
           <div className="flex justify-center mt-6">
             <span className="material-symbols-outlined animate-spin text-primary text-[28px]">progress_activity</span>
           </div>
         )}
       </div>
-
-      <style>{`
-        @keyframes blob-drift {
-          0%, 100% { transform: translate(0, 0) scale(1); }
-          33% { transform: translate(20px, -20px) scale(1.08); }
-          66% { transform: translate(-15px, 15px) scale(0.95); }
-        }
-      `}</style>
     </div>
   );
 }
