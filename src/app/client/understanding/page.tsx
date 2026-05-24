@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
-import Footer from "@/components/layout/Footer";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 
 export default function UnderstandingPage() {
@@ -81,7 +80,6 @@ export default function UnderstandingPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

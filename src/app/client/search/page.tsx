@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import NavBar from "@/components/layout/NavBar";
-import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import PillBadge from "@/components/ui/PillBadge";
@@ -141,7 +140,6 @@ export default function ClientSearchPage() {
       </main>
 
       <BottomNav role="client" />
-      <Footer />
     </div>
   );
 }

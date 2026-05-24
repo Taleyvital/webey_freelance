@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase-browser";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
-import Footer from "@/components/layout/Footer";
 
 type Role = "client" | "freelancer" | null;
 
@@ -145,7 +144,6 @@ export default function OnboardingPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

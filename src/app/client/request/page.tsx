@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import NavBar from "@/components/layout/NavBar";
-import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 
@@ -99,7 +98,6 @@ export default function RequestPage() {
       </main>
 
       <BottomNav role="client" />
-      <Footer />
     </div>
   );
 }

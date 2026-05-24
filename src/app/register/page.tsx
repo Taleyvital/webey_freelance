@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase-browser";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
-import Footer from "@/components/layout/Footer";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -106,7 +105,6 @@ export default function RegisterPage() {
             </Link>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
@@ -257,7 +255,6 @@ export default function RegisterPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

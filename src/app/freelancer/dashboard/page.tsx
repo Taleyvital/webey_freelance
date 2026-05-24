@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
-import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import PillBadge from "@/components/ui/PillBadge";
@@ -130,7 +129,6 @@ export default function FreelancerDashboard() {
       </main>
 
       <BottomNav role="freelancer" />
-      <Footer />
     </div>
   );
 }

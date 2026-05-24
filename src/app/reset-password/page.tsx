@@ -6,7 +6,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase-browser";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
-import Footer from "@/components/layout/Footer";
 
 export default function ResetPasswordPage() {
   const [password, setPassword] = useState("");
@@ -62,7 +61,6 @@ export default function ResetPasswordPage() {
             </p>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
@@ -168,7 +166,6 @@ export default function ResetPasswordPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }

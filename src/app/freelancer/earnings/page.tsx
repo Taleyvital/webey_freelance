@@ -1,7 +1,6 @@
 "use client";
 
 import NavBar from "@/components/layout/NavBar";
-import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 
@@ -95,7 +94,6 @@ export default function EarningsPage() {
       </main>
 
       <BottomNav role="freelancer" />
-      <Footer />
     </div>
   );
 }

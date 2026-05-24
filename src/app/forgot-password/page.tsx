@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase-browser";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
-import Footer from "@/components/layout/Footer";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -68,7 +67,6 @@ export default function ForgotPasswordPage() {
             </Link>
           </div>
         </main>
-        <Footer />
       </div>
     );
   }
@@ -143,7 +141,6 @@ export default function ForgotPasswordPage() {
         </div>
       </main>
 
-      <Footer />
     </div>
   );
 }
