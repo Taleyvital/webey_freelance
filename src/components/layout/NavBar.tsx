@@ -63,7 +63,7 @@ export default function NavBar({ role }: NavBarProps) {
         {/* Profile avatar placeholder */}
         {role && (
           <Link
-            href={role === "freelancer" ? "/freelancer/profile" : "/client/dashboard"}
+            href={role === "freelancer" ? "/freelancer/profile" : "/client/profile"}
             className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center overflow-hidden hover:ring-2 hover:ring-primary/30 transition-all"
           >
             <span className="material-symbols-outlined text-on-surface-variant text-[20px]">
