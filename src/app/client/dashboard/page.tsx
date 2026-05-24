@@ -1,19 +1,55 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import { freelancers } from "@/lib/freelancers";
 
+const categories = [
+  { label: "Tous", icon: "grid_view", color: "from-slate-400 to-slate-600" },
+  { label: "Design", icon: "palette", color: "from-violet-400 to-purple-600" },
+  { label: "Dev", icon: "code", color: "from-emerald-400 to-teal-600" },
+  { label: "Marketing", icon: "trending_up", color: "from-amber-400 to-orange-500" },
+  { label: "Vidéo", icon: "videocam", color: "from-rose-400 to-pink-600" },
+  { label: "Rédaction", icon: "edit_note", color: "from-sky-400 to-blue-600" },
+  { label: "Mobile", icon: "smartphone", color: "from-indigo-400 to-blue-600" },
+  { label: "SEO", icon: "search", color: "from-lime-400 to-green-600" },
+];
+
 export default function ClientDashboard() {
+  const [activeCategory, setActiveCategory] = useState("Tous");
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <AmbientBlobs />
       <NavBar role="client" />
 
       <main className="flex-grow pt-24 pb-32">
-        <div className="max-w-[480px] mx-auto px-4 space-y-6 pt-4">
+        {/* Category carousel */}
+        <div className="max-w-[480px] mx-auto pt-4 mb-6 animate-fade-in-up">
+          <div className="flex gap-3 overflow-x-auto px-4 pb-1 scrollbar-hide">
+            {categories.map((cat) => (
+              <button
+                key={cat.label}
+                onClick={() => setActiveCategory(cat.label)}
+                className={`flex flex-col items-center gap-1.5 shrink-0 transition-all duration-200 ${
+                  activeCategory === cat.label ? "opacity-100 scale-105" : "opacity-60"
+                }`}
+              >
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center shadow-sm`}>
+                  <span className="material-symbols-outlined text-white text-[24px]">{cat.icon}</span>
+                </div>
+                <span className={`text-[11px] font-medium ${activeCategory === cat.label ? "text-on-surface" : "text-on-surface-variant"}`}>
+                  {cat.label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="max-w-[480px] mx-auto px-4 space-y-6">
           {freelancers.map((f, i) => (
             <div
               key={f.id}
