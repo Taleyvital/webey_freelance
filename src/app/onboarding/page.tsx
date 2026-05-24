@@ -18,7 +18,24 @@ export default function OnboardingPage() {
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
-    v.play().catch(() => {});
+
+    const tryPlay = () => { v.play().catch(() => {}); };
+
+    // Tentative immédiate
+    tryPlay();
+
+    // iOS PWA : rejouer au premier touch si bloqué
+    const onTouch = () => { tryPlay(); document.removeEventListener("touchstart", onTouch); };
+    document.addEventListener("touchstart", onTouch);
+
+    // Rejouer si l'app revient au premier plan
+    const onVisible = () => { if (!document.hidden) tryPlay(); };
+    document.addEventListener("visibilitychange", onVisible);
+
+    return () => {
+      document.removeEventListener("touchstart", onTouch);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
   }, []);
 
   async function handleSelect(role: Role) {
@@ -48,6 +65,7 @@ export default function OnboardingPage() {
         {/* Fallback gradient derrière la vidéo */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0d0628] via-[#0a1a6e] to-[#0058bc]" />
 
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
         <video
           ref={videoRef}
           autoPlay
@@ -56,7 +74,9 @@ export default function OnboardingPage() {
           playsInline
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
+          {...{ "webkit-playsinline": "true", "x-webkit-airplay": "allow" }}
         >
+          <source src="/video/video-hero-chemise-jaune-h264.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
           <source src="/video/video-hero-chemise-jaune-h264.mp4" type="video/mp4" />
         </video>
 
