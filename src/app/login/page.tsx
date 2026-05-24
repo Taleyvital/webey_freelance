@@ -31,7 +31,13 @@ export default function LoginPage() {
     setLoading(false);
 
     if (error) {
-      setError(error.message);
+      if (error.message.toLowerCase().includes("invalid login credentials") || error.message.toLowerCase().includes("invalid credentials")) {
+        setError("Email ou mot de passe incorrect.");
+      } else if (error.message.toLowerCase().includes("email not confirmed")) {
+        setError("Confirmez votre email avant de vous connecter. Vérifiez votre boîte mail.");
+      } else {
+        setError(error.message);
+      }
       return;
     }
 
