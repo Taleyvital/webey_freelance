@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title: "Webey",
   },
   icons: {
-    apple: "/api/pwa-icon?size=192",
+    apple: "/webey-bleu.jpeg",
   },
 };
 
