@@ -1,14 +1,13 @@
 "use client";
 
-import { use } from "react";
 import { useRouter } from "next/navigation";
 import NavBar from "@/components/layout/NavBar";
 import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import { getFreelancer } from "@/lib/freelancers";
 
-export default function FreelancerProfilePage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function FreelancerProfilePage({ params }: { params: { id: string } }) {
+  const { id } = params;
   const router = useRouter();
   const f = getFreelancer(id);
 
