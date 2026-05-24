@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase-browser";
@@ -12,14 +12,6 @@ export default function OnboardingPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = true;
-    video.play().catch(() => {});
-  }, []);
 
   async function handleSelect(role: Role) {
     if (!role || loading) return;
@@ -42,32 +34,47 @@ export default function OnboardingPage() {
   return (
     <div className="flex flex-col min-h-screen bg-background overflow-hidden">
 
-      {/* Hero vidéo — grande section haute */}
-      <div className="relative w-full flex-shrink-0" style={{ height: "60vh", minHeight: 340 }}>
-        {/* Vidéo en boucle */}
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          disablePictureInPicture
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ WebkitPlaysinline: true } as React.CSSProperties}
-        >
-          <source src="/video/video-hero-fille.mp4" type="video/mp4" />
-          <source src="/video/video-hero-chemise-jaune.mp4" type="video/mp4" />
-        </video>
+      {/* Hero CSS animé */}
+      <div className="relative w-full flex-shrink-0 overflow-hidden" style={{ height: "60vh", minHeight: 340 }}>
 
-        {/* Fallback si vidéo bloquée */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a0533] via-[#0d1b6e] to-[#0058bc] -z-10" />
+        {/* Fond dégradé principal */}
+        <div className="absolute inset-0" style={{
+          background: "linear-gradient(135deg, #0d0628 0%, #0a1a6e 40%, #0058bc 75%, #1a7fe8 100%)"
+        }} />
 
-        {/* Overlay sombre dégradé */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/20 to-black/60" />
+        {/* Blob 1 animé */}
+        <div className="absolute rounded-full" style={{
+          width: 320, height: 320,
+          top: "-60px", left: "-80px",
+          background: "radial-gradient(circle, rgba(124,58,237,0.45) 0%, transparent 70%)",
+          animation: "blob-drift 8s ease-in-out infinite",
+        }} />
 
-        {/* Logo Webey */}
-        <div className="absolute top-0 left-0 right-0 flex justify-center" style={{ paddingTop: 'calc(env(safe-area-inset-top) + 1.5rem)' }}>
+        {/* Blob 2 animé */}
+        <div className="absolute rounded-full" style={{
+          width: 280, height: 280,
+          bottom: "20px", right: "-60px",
+          background: "radial-gradient(circle, rgba(59,130,246,0.5) 0%, transparent 70%)",
+          animation: "blob-drift 10s ease-in-out infinite reverse",
+        }} />
+
+        {/* Blob 3 animé */}
+        <div className="absolute rounded-full" style={{
+          width: 200, height: 200,
+          top: "40%", left: "50%",
+          transform: "translate(-50%, -50%)",
+          background: "radial-gradient(circle, rgba(99,102,241,0.3) 0%, transparent 70%)",
+          animation: "blob-drift 6s ease-in-out infinite 2s",
+        }} />
+
+        {/* Grille de points */}
+        <div className="absolute inset-0 opacity-[0.07]" style={{
+          backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+          backgroundSize: "28px 28px",
+        }} />
+
+        {/* Logo */}
+        <div className="absolute top-0 left-0 right-0 flex justify-center" style={{ paddingTop: "calc(env(safe-area-inset-top) + 1.5rem)" }}>
           <div className="flex items-center gap-2">
             <div className="w-7 h-7 relative">
               <Image src="/logo-webey.svg" alt="Webey" fill className="object-contain brightness-0 invert" priority />
@@ -76,26 +83,24 @@ export default function OnboardingPage() {
           </div>
         </div>
 
-        {/* Contenu central */}
-        <div className="absolute inset-0 flex flex-col items-end justify-end text-center px-8 pb-10">
-          <h1 className="text-white font-bold text-[26px] leading-tight mb-2 w-full">
-            Bienvenue sur Webey
+        {/* Texte bas */}
+        <div className="absolute bottom-12 left-0 right-0 px-8 text-left">
+          <p className="text-white/60 text-label-md font-medium uppercase tracking-widest mb-2">Plateforme premium</p>
+          <h1 className="text-white font-bold text-[28px] leading-tight mb-2">
+            Les meilleurs talents<br />africains, à portée.
           </h1>
-          <p className="text-white/80 text-body-sm max-w-[300px] leading-relaxed w-full">
-            La plateforme qui connecte les meilleurs talents africains aux projets ambitieux.
-          </p>
         </div>
 
-        {/* Vague de transition */}
+        {/* Vague */}
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 390 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
-            <path d="M0 40 L0 20 Q97.5 0 195 20 Q292.5 40 390 20 L390 40 Z" fill="#f9f9f9"/>
+          <svg viewBox="0 0 390 48" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
+            <path d="M0 48 L0 28 Q97.5 4 195 24 Q292.5 44 390 20 L390 48 Z" fill="#f9f9f9"/>
           </svg>
         </div>
       </div>
 
       {/* Section choix */}
-      <div className="flex-1 flex flex-col px-5 pt-4 pb-10">
+      <div className="flex-1 flex flex-col px-5 pt-5 pb-10">
         <div className="text-center mb-6">
           <h2 className="text-headline-md font-semibold text-on-surface">Qui êtes-vous ?</h2>
           <p className="text-body-sm text-on-surface-variant mt-1">Choisissez votre profil pour continuer</p>
@@ -169,6 +174,14 @@ export default function OnboardingPage() {
           </div>
         )}
       </div>
+
+      <style>{`
+        @keyframes blob-drift {
+          0%, 100% { transform: translate(0, 0) scale(1); }
+          33% { transform: translate(20px, -20px) scale(1.08); }
+          66% { transform: translate(-15px, 15px) scale(0.95); }
+        }
+      `}</style>
     </div>
   );
 }
