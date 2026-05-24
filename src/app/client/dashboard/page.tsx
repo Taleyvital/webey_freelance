@@ -3,6 +3,7 @@
 import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import PillBadge from "@/components/ui/PillBadge";
 
@@ -48,7 +49,7 @@ export default function ClientDashboard() {
       <AmbientBlobs />
       <NavBar role="client" />
 
-      <main className="flex-grow pt-28 pb-stack-lg">
+      <main className="flex-grow pt-28 pb-28 md:pb-stack-lg">
         <div className="page-container">
           {/* Welcome + CTA */}
           <div className="mb-stack-lg animate-fade-in-up">
@@ -115,6 +116,7 @@ export default function ClientDashboard() {
         </div>
       </main>
 
+      <BottomNav role="client" />
       <Footer />
     </div>
   );

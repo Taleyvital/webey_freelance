@@ -2,6 +2,7 @@
 
 import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
+import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
 import PillBadge from "@/components/ui/PillBadge";
 
@@ -19,7 +20,7 @@ export default function FreelancerProfilePage() {
       <AmbientBlobs />
       <NavBar role="freelancer" />
 
-      <main className="flex-grow pt-28 pb-stack-lg">
+      <main className="flex-grow pt-28 pb-28 md:pb-stack-lg">
         <div className="page-container max-w-[720px] mx-auto">
           {/* Profile header */}
           <div className="card flex flex-col md:flex-row items-center md:items-start gap-8 mb-stack-lg animate-fade-in-up">
@@ -99,6 +100,7 @@ export default function FreelancerProfilePage() {
         </div>
       </main>
 
+      <BottomNav role="freelancer" />
       <Footer />
     </div>
   );
