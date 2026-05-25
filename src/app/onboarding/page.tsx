@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { createClient } from "@/lib/supabase-browser";
 
 type Role = "client" | "freelancer" | null;
@@ -60,7 +59,7 @@ export default function OnboardingPage() {
     <div className="flex flex-col min-h-screen bg-background overflow-hidden">
 
       {/* Hero vidéo */}
-      <div className="relative w-full flex-shrink-0" style={{ height: "60vh", minHeight: 340 }}>
+      <div className="relative w-full flex-shrink-0" style={{ height: "72vh", minHeight: 400 }}>
 
         {/* Fallback gradient derrière la vidéo */}
         <div className="absolute inset-0 bg-gradient-to-br from-[#0d0628] via-[#0a1a6e] to-[#0058bc]" />
@@ -82,16 +81,6 @@ export default function OnboardingPage() {
 
         {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/10 to-black/65" />
-
-        {/* Logo */}
-        <div className="absolute top-0 left-0 right-0 flex justify-center" style={{ paddingTop: "calc(env(safe-area-inset-top) + 1.5rem)" }}>
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 relative">
-              <Image src="/logo-webey.svg" alt="Webey" fill className="object-contain brightness-0 invert" priority />
-            </div>
-            <span className="text-white font-semibold text-headline-md tracking-tighter">Webey</span>
-          </div>
-        </div>
 
         {/* Texte bas */}
         <div className="absolute bottom-12 left-0 right-0 px-8 text-left">
@@ -120,13 +109,13 @@ export default function OnboardingPage() {
           <button
             onClick={() => handleSelect("client")}
             disabled={loading}
-            className={`relative flex flex-col items-center text-center p-5 rounded-3xl border-2 transition-all duration-200 active:scale-95 ${
+            className={`relative flex flex-col items-center text-center p-5 rounded-3xl border transition-all duration-200 active:scale-95 backdrop-blur-xl ${
               selected === "client"
-                ? "border-primary bg-primary/5 shadow-[0_0_0_4px_rgba(0,88,188,0.1)]"
-                : "border-surface-container bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
+                ? "border-primary/40 bg-primary/10 shadow-[0_8px_32px_rgba(0,88,188,0.15),inset_0_1px_0_rgba(255,255,255,0.6)] ring-2 ring-primary/30"
+                : "border-white/60 bg-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)]"
             }`}
           >
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all ${selected === "client" ? "bg-primary" : "bg-primary/10"}`}>
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all backdrop-blur-sm ${selected === "client" ? "bg-primary" : "bg-primary/15"}`}>
               <span className={`material-symbols-outlined text-[28px] ${selected === "client" ? "text-white icon-filled" : "text-primary"}`}>person_search</span>
             </div>
             <p className="text-body-md font-semibold text-on-surface">Client</p>
@@ -141,13 +130,13 @@ export default function OnboardingPage() {
           <button
             onClick={() => handleSelect("freelancer")}
             disabled={loading}
-            className={`relative flex flex-col items-center text-center p-5 rounded-3xl border-2 transition-all duration-200 active:scale-95 ${
+            className={`relative flex flex-col items-center text-center p-5 rounded-3xl border transition-all duration-200 active:scale-95 backdrop-blur-xl ${
               selected === "freelancer"
-                ? "border-violet-500 bg-violet-50 shadow-[0_0_0_4px_rgba(139,92,246,0.1)]"
-                : "border-surface-container bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
+                ? "border-violet-400/40 bg-violet-500/10 shadow-[0_8px_32px_rgba(139,92,246,0.15),inset_0_1px_0_rgba(255,255,255,0.6)] ring-2 ring-violet-400/30"
+                : "border-white/60 bg-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)]"
             }`}
           >
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all ${selected === "freelancer" ? "bg-violet-500" : "bg-violet-50"}`}>
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3 transition-all backdrop-blur-sm ${selected === "freelancer" ? "bg-violet-500" : "bg-violet-500/15"}`}>
               <span className={`material-symbols-outlined text-[28px] ${selected === "freelancer" ? "text-white icon-filled" : "text-violet-500"}`}>terminal</span>
             </div>
             <p className="text-body-md font-semibold text-on-surface">Freelancer</p>
