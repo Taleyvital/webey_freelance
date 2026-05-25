@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import NavBar from "@/components/layout/NavBar";
 import BottomNav from "@/components/layout/BottomNav";
 import AmbientBlobs from "@/components/layout/AmbientBlobs";
@@ -42,9 +43,18 @@ export default function ClientProfilePage() {
                 ))}
               </div>
             </div>
-            <button className="btn-secondary h-10 px-5 text-label-md shrink-0">
-              Modifier
-            </button>
+            <div className="flex flex-col gap-2 shrink-0">
+              <button className="btn-secondary h-10 px-5 text-label-md">
+                Modifier
+              </button>
+              <Link
+                href="/onboarding"
+                className="btn-primary h-10 px-5 text-label-md flex items-center justify-center gap-2"
+              >
+                <span className="material-symbols-outlined text-[18px]">edit_note</span>
+                Compléter mon profil
+              </Link>
+            </div>
           </div>
 
           {/* Stats */}
