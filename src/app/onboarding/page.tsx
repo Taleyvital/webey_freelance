@@ -81,76 +81,84 @@ export default function OnboardingPage() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/75" />
 
       {/* Texte hero */}
-      <div className="absolute left-0 right-0 px-8 text-left" style={{ bottom: "calc(260px + env(safe-area-inset-bottom))" }}>
+      <div className="absolute left-0 right-0 px-8 text-left" style={{ bottom: "calc(300px + env(safe-area-inset-bottom))" }}>
         <p className="text-white/60 text-label-md font-medium uppercase tracking-widest mb-2">Plateforme premium</p>
         <h1 className="text-white font-bold text-[28px] leading-tight">
           Les meilleurs talents<br />africains, à portée.
         </h1>
       </div>
 
-      {/* Panneau liquid glass bas */}
+      {/* Zone mascotte + boutons */}
       <div
-        className="absolute left-0 right-0 bottom-0 px-4"
+        className="absolute left-0 right-0 bottom-0 flex flex-col items-center"
         style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1.5rem)" }}
       >
-        <div className="rounded-3xl backdrop-blur-2xl bg-white/15 border border-white/25 shadow-[0_-1px_0_rgba(255,255,255,0.2),0_20px_60px_rgba(0,0,0,0.3)] p-5">
+        {/* Titre au-dessus */}
+        <div className="text-center mb-2 px-4">
+          <h2 className="text-white font-semibold text-[17px]">Qui êtes-vous ?</h2>
+          <p className="text-white/60 text-[12px] mt-0.5">Choisissez votre profil pour continuer</p>
+        </div>
 
-          <div className="text-center mb-4">
-            <h2 className="text-white font-semibold text-[18px]">Qui êtes-vous ?</h2>
-            <p className="text-white/60 text-label-md mt-0.5">Choisissez votre profil pour continuer</p>
-          </div>
+        {/* Mascotte + boutons superposés */}
+        <div className="relative w-full flex justify-center items-end" style={{ height: 220 }}>
 
-          <div className="grid grid-cols-2 gap-3">
+          {/* Bouton Client — main gauche de la mascotte */}
+          <div className="absolute left-4 bottom-6 z-20">
             <button
               onClick={() => handleSelect("client")}
               disabled={loading}
-              className={`relative flex flex-col items-center text-center p-4 rounded-2xl border transition-all duration-200 active:scale-95 backdrop-blur-xl ${
+              className={`flex flex-col items-center text-center px-5 py-3 rounded-2xl border transition-all duration-200 active:scale-95 backdrop-blur-xl shadow-lg ${
                 selected === "client"
-                  ? "border-white/50 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] ring-2 ring-white/40"
-                  : "border-white/20 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
+                  ? "border-white/60 bg-white/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] ring-2 ring-white/40"
+                  : "border-white/25 bg-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
               }`}
             >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 transition-all ${selected === "client" ? "bg-white/30" : "bg-white/15"}`}>
-                <span className={`material-symbols-outlined text-[24px] ${selected === "client" ? "text-white icon-filled" : "text-white/80"}`}>person_search</span>
-              </div>
-              <p className="text-white font-semibold text-[14px]">Client</p>
-              <p className="text-white/60 text-[11px] mt-0.5 leading-snug">Je cherche des talents pour mes projets</p>
+              <span className={`material-symbols-outlined text-[22px] mb-1 ${selected === "client" ? "text-white icon-filled" : "text-white/80"}`}>person_search</span>
+              <p className="text-white font-bold text-[13px]">Client</p>
+              <p className="text-white/60 text-[10px] leading-snug max-w-[80px]">Je cherche des talents</p>
               {selected === "client" && (
-                <div className="absolute top-2.5 right-2.5">
-                  <span className="material-symbols-outlined icon-filled text-white text-[16px]">check_circle</span>
-                </div>
-              )}
-            </button>
-
-            <button
-              onClick={() => handleSelect("freelancer")}
-              disabled={loading}
-              className={`relative flex flex-col items-center text-center p-4 rounded-2xl border transition-all duration-200 active:scale-95 backdrop-blur-xl ${
-                selected === "freelancer"
-                  ? "border-white/50 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] ring-2 ring-white/40"
-                  : "border-white/20 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
-              }`}
-            >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-2 transition-all ${selected === "freelancer" ? "bg-white/30" : "bg-white/15"}`}>
-                <span className={`material-symbols-outlined text-[24px] ${selected === "freelancer" ? "text-white icon-filled" : "text-white/80"}`}>terminal</span>
-              </div>
-              <p className="text-white font-semibold text-[14px]">Freelancer</p>
-              <p className="text-white/60 text-[11px] mt-0.5 leading-snug">Je propose mes services et compétences</p>
-              {selected === "freelancer" && (
-                <div className="absolute top-2.5 right-2.5">
-                  <span className="material-symbols-outlined icon-filled text-white text-[16px]">check_circle</span>
-                </div>
+                <span className="material-symbols-outlined icon-filled text-white text-[14px] mt-1">check_circle</span>
               )}
             </button>
           </div>
 
-          {error && <p className="text-label-md text-red-300 text-center mt-3">{error}</p>}
-          {loading && (
-            <div className="flex justify-center mt-4">
-              <span className="material-symbols-outlined animate-spin text-white text-[24px]">progress_activity</span>
-            </div>
-          )}
+          {/* Mascotte centrée */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/mascotte.png"
+            alt="Mascotte Webey"
+            className="relative z-10 object-contain select-none pointer-events-none"
+            style={{ height: 210, width: "auto", marginBottom: 0 }}
+            draggable={false}
+          />
+
+          {/* Bouton Freelancer — main droite de la mascotte */}
+          <div className="absolute right-4 bottom-6 z-20">
+            <button
+              onClick={() => handleSelect("freelancer")}
+              disabled={loading}
+              className={`flex flex-col items-center text-center px-5 py-3 rounded-2xl border transition-all duration-200 active:scale-95 backdrop-blur-xl shadow-lg ${
+                selected === "freelancer"
+                  ? "border-white/60 bg-white/35 shadow-[inset_0_1px_0_rgba(255,255,255,0.5)] ring-2 ring-white/40"
+                  : "border-white/25 bg-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
+              }`}
+            >
+              <span className={`material-symbols-outlined text-[22px] mb-1 ${selected === "freelancer" ? "text-white icon-filled" : "text-white/80"}`}>terminal</span>
+              <p className="text-white font-bold text-[13px]">Freelancer</p>
+              <p className="text-white/60 text-[10px] leading-snug max-w-[80px]">Je propose mes services</p>
+              {selected === "freelancer" && (
+                <span className="material-symbols-outlined icon-filled text-white text-[14px] mt-1">check_circle</span>
+              )}
+            </button>
+          </div>
         </div>
+
+        {error && <p className="text-[12px] text-red-300 text-center mt-2 px-4">{error}</p>}
+        {loading && (
+          <div className="flex justify-center mt-2">
+            <span className="material-symbols-outlined animate-spin text-white text-[22px]">progress_activity</span>
+          </div>
+        )}
       </div>
     </div>
   );
