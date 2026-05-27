@@ -56,7 +56,7 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="relative w-full h-[100dvh] overflow-hidden bg-black">
+    <div className="relative w-full overflow-hidden bg-black" style={{ height: "100vh", minHeight: "-webkit-fill-available", marginTop: "calc(-1 * env(safe-area-inset-top))", paddingTop: "env(safe-area-inset-top)" }}>
 
       {/* Fallback gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0d0628] via-[#0a1a6e] to-[#0058bc]" />
